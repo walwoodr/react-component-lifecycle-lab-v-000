@@ -14,15 +14,25 @@ export default class App extends React.Component {
     initialize();
     this.updateChart = this.updateChart.bind(this);
     this.fetchTweets = this.fetchTweets.bind(this);
+    this.startInterval = this.startInterval.bind(this);
+    this.cleanUpInterval = this.cleanUpInterval.bind(this);
   }
 
-  // TODO: componentWillMount()
+  componentWillMount() {
+    this.fetchTweets();
+  }
 
-  // TODO: componentDidMount()
+  componentDidMount(){
+    this.startInterval();
+  }
 
-  // TODO: componentWillUnmount()
+  componentWillUnmount(){
+    this.cleanUpInterval();
+  }
 
-  // TODO: componentDidUpdate()
+  componentDidUpdate(prevProps, prevState) {
+    this.updateChart(this.state.latestTweets.length);
+  }
 
   updateChart(numTweets) {
     update(numTweets);
